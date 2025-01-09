@@ -1,3 +1,8 @@
+export const countDoubleNumber = (dominoes: number[][]): number => {
+  const doubleCount = dominoes.filter(([a, b]) => a === b).length;
+  return doubleCount;
+};
+
 export const sortAscending = (
   dominoes: number[][],
   setDominoes: (key: number[][]) => void
@@ -34,11 +39,6 @@ export const sortDescending = (
   setDominoes([...dominoes]);
 };
 
-export const countDoubleNumber = (dominoes: number[][]): number => {
-  const doubleCount = dominoes.filter(([a, b]) => a === b).length;
-  return doubleCount;
-};
-
 export const flipNumber = (
   dominoes: number[][],
   setDominoes: (key: number[][]) => void
@@ -71,4 +71,26 @@ export const removeDuplicates = (
   });
 
   setDominoes(uniqueDominoes);
+};
+
+export const removeSameTotalNumber = (
+  inputNumber: number | "",
+  dominoes: number[][],
+  setDominoes: (key: number[][]) => void,
+  setNoMatch: (key: boolean) => void
+) => {
+  if (inputNumber === "") return;
+  const numberInput = Number(inputNumber);
+  const filteredDominoes = dominoes.filter((domino) => {
+    const sum = domino[0] + domino[1];
+    return sum !== numberInput;
+  });
+
+  setDominoes(filteredDominoes);
+
+  if (filteredDominoes.length === dominoes.length) {
+    setNoMatch(true);
+  } else {
+    setNoMatch(false);
+  }
 };

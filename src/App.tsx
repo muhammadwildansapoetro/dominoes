@@ -3,6 +3,7 @@ import {
   countDoubleNumber,
   flipNumber,
   removeDuplicates,
+  removeSameTotalNumber,
   sortAscending,
   sortDescending,
 } from "./utils";
@@ -17,28 +18,9 @@ function App() {
     [3, 4],
     [1, 2],
   ];
-
   const [dominoes, setDominoes] = useState<number[][]>(originalDominoes);
-
   const [inputNumber, setInputNumber] = useState<number | "">("");
   const [noMatch, setNoMatch] = useState<boolean>(false);
-
-  const handleRemove = () => {
-    if (inputNumber === "") return;
-    const number = Number(inputNumber);
-    const filteredDominoes = dominoes.filter((domino) => {
-      const sum = domino[0] + domino[1];
-      return sum !== number;
-    });
-
-    setDominoes(filteredDominoes);
-
-    if (filteredDominoes.length === dominoes.length) {
-      setNoMatch(true);
-    } else {
-      setNoMatch(false);
-    }
-  };
 
   return (
     <>
@@ -117,11 +99,19 @@ function App() {
                 type="number"
                 placeholder="Input number"
                 value={inputNumber}
+                min={0}
                 onChange={(e) => setInputNumber(Number(e.target.value))}
                 className="border p-1 outline-none focus:outline-green-500 rounded-md"
               />
               <button
-                onClick={handleRemove}
+                onClick={() =>
+                  removeSameTotalNumber(
+                    inputNumber,
+                    dominoes,
+                    setDominoes,
+                    setNoMatch
+                  )
+                }
                 className="mt-3 px-2 py-1 bg-green-500 hover:bg-green-600 rounded-md text-white"
               >
                 Remove
