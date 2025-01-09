@@ -45,7 +45,7 @@ function App() {
       <div className="container mx-auto">
         <div className="flex items-center justify-center py-10">
           <div className=" flex-col flex justify-start items-start w-fit border rounded-lg p-5 shadow-lg">
-            <h1 className="text-2xl font-bold">Dominoes</h1>
+            <h1 className="text-2xl font-bold tracking-wide">Dominoes</h1>
 
             <div className="border p-2 rounded-md mt-3 w-full bg-green-50">
               <h1 className="font-bold">Source</h1>
